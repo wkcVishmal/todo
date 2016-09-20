@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default" ng-app="myApp" ng-controller="myCtrl">
+
+        <form class="simple-form" name="myform">
+            <div class="input-group" class="col-xs-8">
+                <div class="col-xs-10">
+                    <input name="name" ng-model="con.name" class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input" ng-click="hideMsg()" required>
+                    <p ng-show="myform.name.$invalid && myform.name.$touched" style="color:red;">The name is required.</p>
+                </div>
+                <span class="input-group-btn">
+                    <div class="form-group">
+                        <button type="submit" ng-click="update(con)" class="btn btn-primary" ng-disabled="myform.$invalid">Add Item</button>
+                    </div>
+                </span>
+                <div class="col-md-2"></div>
+
+            </div>
+
+
+        </form>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item Name</th>
+                <th>State</th>
+                <th>Priority</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

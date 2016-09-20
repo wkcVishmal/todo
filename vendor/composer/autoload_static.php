@@ -224,6 +224,25 @@ class ComposerStaticInitcb84976f06208737c5906295d4741c1c
                 0 => __DIR__ . '/..' . '/doctrine/annotations/lib',
             ),
         ),
+        'B' => 
+        array (
+            'Behat\\Transliterator' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/transliterator/src',
+            ),
+            'Behat\\Testwork' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/behat/src',
+            ),
+            'Behat\\Gherkin' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/gherkin/src',
+            ),
+            'Behat\\Behat' => 
+            array (
+                0 => __DIR__ . '/..' . '/behat/behat/src',
+            ),
+        ),
     );
 
     public static $classMap = array (

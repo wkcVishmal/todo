@@ -16,4 +16,20 @@ class TodoController extends Controller
         // replace this example code with whatever you need
         return $this->render('todo/home.html.twig');
     }
+
+    /**
+     * @Route("/listdata")
+     * @Method("GET")
+     */
+    public function todoData(){
+        $em = $this->getDoctrine()->getManager();
+        $contacts = $em->getRepository('AppBundle:Todo')->findAll();
+
+        $contacts = $this->get('serializer')->serialize($contacts,'json');
+        $respose = new Response($contacts);
+        $respose->headers->set('Content-Type','application/json');
+        return $respose;
+    }
+
+
 }

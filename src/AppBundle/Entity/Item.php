@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chamika
- * Date: 9/15/16
- * Time: 5:56 PM
- */
-
 namespace AppBundle\Entity;
-
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="item")
  */
 class Item
@@ -37,6 +31,24 @@ class Item
      * @ORM\Column(type="string")
      */
     private $priority;
+
+    /**
+     * @ORM\Column(name="created", type="string", length=255)
+     */
+
+    private $created;
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        $this->created = date('Y-m-d H:i:s');
+    }
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $done;
 
     /**
      * @return mixed
@@ -100,6 +112,38 @@ class Item
     public function setPriority($priority)
     {
         $this->priority = $priority;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDone()
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param mixed $done
+     */
+    public function setDone($done)
+    {
+        $this->done = $done;
     }
 
 

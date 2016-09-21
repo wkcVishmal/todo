@@ -161,7 +161,7 @@ class EntityRepository implements ObjectRepository, Selectable
      */
     public function findAll()
     {
-        return $this->findBy(array());
+        return $this->findBy(array(), array('priority'=>'ASC','created' => 'DESC'));
     }
 
     /**

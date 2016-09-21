@@ -106,7 +106,28 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->redirect($pathinfo.'/', 'homepage');
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\TodoController::indexAction',  '_route' => 'homepage',);
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::indexAction',  '_route' => 'homepage',);
+        }
+
+        // app_item_tododata
+        if ($pathinfo === '/listdata') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_app_item_tododata;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::todoData',  '_route' => 'app_item_tododata',);
+        }
+        not_app_item_tododata:
+
+        // app_item_savecontact
+        if ($pathinfo === '/saveItem') {
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::saveContact',  '_route' => 'app_item_savecontact',);
+        }
+
+        // app_item_deletecontact
+        if ($pathinfo === '/deleteItem') {
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::deleteContact',  '_route' => 'app_item_deletecontact',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

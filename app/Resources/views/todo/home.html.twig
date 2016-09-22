@@ -41,6 +41,7 @@
                     <td ng-show="item.priority == 1">High</td>
                     <td ng-show="item.priority == 2">Normal</td>
                     <td ng-show="item.priority == 3">Low</td>
+                    <td>{{ '{{ item.created }}' }}</td>
                     <td><input type="button" ng-click="delete(item.id)" value="Delete"></td>
                 </tr>
 

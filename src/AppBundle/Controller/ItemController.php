@@ -40,14 +40,14 @@ class ItemController extends Controller
     /**
      * @Route("/saveItem")
      */
-    public function saveContact(Request $request){
+    public function saveItem(Request $request){
         try{
             $data = json_decode($request->getContent(), true);
 
             $item = new Item();
 
             $name = $data['name'];
-            $state = "NotDone";
+            $state = "Set As Done";
             $priority = $data['priority'];
 
             $item->setName($name);
@@ -63,7 +63,7 @@ class ItemController extends Controller
                 'Notice',
                 'Contact Added'
             );
-            return new JsonResponse(array('data' => $name));
+            return new JsonResponse(array('data' => "saved"));
         }catch (Exception $e){
 
         }
@@ -77,6 +77,54 @@ class ItemController extends Controller
             $data = json_decode($request->getContent(), true);
 
             $id = $data['id'];
+
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
+
+            if ($entity != null){
+                $em->remove($entity);
+                $em->flush();
+            }
+
+            return new JsonResponse(array('data' => "deleted"));
+        }catch (Exception $e){
+
+        }
+
+    }
+
+    /**
+     * @Route("/setDone")
+     *
+     */
+    public function setDone(Request $request){
+        $item = new Item();
+
+        $data = json_decode($request->getContent(), true);
+
+        $id = $data['id'];
+
+        $em = $this->getDoctrine()->getManager();
+        $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
+        echo $id;
+        if ($item != null) {
+            $item->setState("Done");
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+        return new JsonResponse(array('data' => "State Changed"));
+    }
+
+    /**
+     * @Route("/delete/{item}")
+     *
+     */
+    public function delete($item){
+
+        try{
+
+
+            $id = $item;
 
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));

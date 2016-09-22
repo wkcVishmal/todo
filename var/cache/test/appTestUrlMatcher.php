@@ -120,14 +120,24 @@ class appTestUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         }
         not_app_item_tododata:
 
-        // app_item_savecontact
+        // app_item_saveitem
         if ($pathinfo === '/saveItem') {
-            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::saveContact',  '_route' => 'app_item_savecontact',);
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::saveItem',  '_route' => 'app_item_saveitem',);
         }
 
         // app_item_deletecontact
         if ($pathinfo === '/deleteItem') {
             return array (  '_controller' => 'AppBundle\\Controller\\ItemController::deleteContact',  '_route' => 'app_item_deletecontact',);
+        }
+
+        // app_item_setdone
+        if ($pathinfo === '/setDone') {
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::setDone',  '_route' => 'app_item_setdone',);
+        }
+
+        // app_item_delete
+        if (0 === strpos($pathinfo, '/delete') && preg_match('#^/delete/(?P<item>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'app_item_delete')), array (  '_controller' => 'AppBundle\\Controller\\ItemController::delete',));
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

@@ -6,6 +6,11 @@ app.controller('myCtrl', function($scope, $http) {
     $http.get("http://localhost:8000/listdata")
         .then(function(response) {
             $scope.items = response.data;
+            angular.forEach($scope.data, function(value, key){
+                if(value.Password == "thomasTheKing")
+                    console.log("username is thomas");
+            });
+
         }, function(response) {
             $scope.items = "Something went wrong";
         });
@@ -46,15 +51,10 @@ app.controller('myCtrl', function($scope, $http) {
             "id": $scope.id
         };
 
-        var config = {
-            headers : {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        };
-
+        var url = 'http://localhost:8000/delete/'+$scope.id;
         var x;
         if (confirm('Are you sure?\nDo you want to delete this Item?\n Item id : '+$scope.id) == true) {
-            $http.post('http://localhost:8000/deleteItem', $scope.data, config)
+            $http.delete(url)
                 .success(function (data, status, headers, config) {
                     $http.get("http://localhost:8000/listdata")
                         .then(function(response) {
@@ -76,20 +76,11 @@ app.controller('myCtrl', function($scope, $http) {
 
 
     $scope.data = {};
-    $scope.edit = function (id) {
+    $scope.done = function (id) {
         $scope.id = id;
         $scope.data = {
             "id": $scope.id
         };
-
-        $http.get("http://localhost:8000/listdata")
-            .then(function(response) {
-                $scope.contact = response.data;
-                return $scope.contact.id === $scope.id;
-
-            }, function(response) {
-                $scope.contacts = "Something went wrong";
-            });
 
         var config = {
             headers : {
@@ -97,22 +88,36 @@ app.controller('myCtrl', function($scope, $http) {
             }
         };
 
-            $http.post('http://localhost:8000/getContact', $scope.data, config)
-                .success(function (data, status, headers, config) {
-                    $http.get("http://localhost:8000/listdata")
-                        .then(function(response) {
-                            $scope.contacts = response.data;
-                        }, function(response) {
-                            $scope.contacts = "Something went wrong";
-                        });
-                })
-                .error(function (data, status, header, config) {
-                    $scope.ResponseDetails = "Data: " + data +
-                        "<hr />status: " + status +
-                        "<hr />headers: " + header +
-                        "<hr />config: " + config;
-                });
+        $http.patch('http://localhost:8000/setDone', $scope.data, config)
+            .success(function (data, status, headers, config) {
+                $http.get("http://localhost:8000/listdata")
+                    .then(function(response) {
+                        $scope.items = response.data;
+                    }, function(response) {
+                        $scope.items = "Something went wrong";
+                    });
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
     };
+
+    $scope.con = {};
+    $scope.con.priority = "2";
+
+    $scope.con.countries = [{
+        id: "1",
+        name: "High"
+    }, {
+        id: "2",
+        name: "Normal"
+    }, {
+        id: "3",
+        name: "Low"
+    }];
 
 
 

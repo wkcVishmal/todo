@@ -22,20 +22,20 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7b45b88544c53a4feb67c34c78895b7ec8ab7307068491bf38331ea61750dbd9 = $this->env->getExtension("native_profiler");
-        $__internal_7b45b88544c53a4feb67c34c78895b7ec8ab7307068491bf38331ea61750dbd9->enter($__internal_7b45b88544c53a4feb67c34c78895b7ec8ab7307068491bf38331ea61750dbd9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "todo/home.html.twig"));
+        $__internal_ff78602d9f3469b6a0e1be9b95ff48f8748ef22158b9c3238aa93336f28d473f = $this->env->getExtension("native_profiler");
+        $__internal_ff78602d9f3469b6a0e1be9b95ff48f8748ef22158b9c3238aa93336f28d473f->enter($__internal_ff78602d9f3469b6a0e1be9b95ff48f8748ef22158b9c3238aa93336f28d473f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "todo/home.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7b45b88544c53a4feb67c34c78895b7ec8ab7307068491bf38331ea61750dbd9->leave($__internal_7b45b88544c53a4feb67c34c78895b7ec8ab7307068491bf38331ea61750dbd9_prof);
+        $__internal_ff78602d9f3469b6a0e1be9b95ff48f8748ef22158b9c3238aa93336f28d473f->leave($__internal_ff78602d9f3469b6a0e1be9b95ff48f8748ef22158b9c3238aa93336f28d473f_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_09be96bbe59f5f44a1182f57cfcadff0c683c2b477093e26e61820413a462ade = $this->env->getExtension("native_profiler");
-        $__internal_09be96bbe59f5f44a1182f57cfcadff0c683c2b477093e26e61820413a462ade->enter($__internal_09be96bbe59f5f44a1182f57cfcadff0c683c2b477093e26e61820413a462ade_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_a0d55f86a63d91782678c015e1454f6c62263ee6a5fd2d052afee78a1ffb524f = $this->env->getExtension("native_profiler");
+        $__internal_a0d55f86a63d91782678c015e1454f6c62263ee6a5fd2d052afee78a1ffb524f->enter($__internal_a0d55f86a63d91782678c015e1454f6c62263ee6a5fd2d052afee78a1ffb524f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <div class=\"panel panel-default\" ng-app=\"myApp\" ng-controller=\"myCtrl\">
@@ -45,14 +45,10 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
                 <div class=\"col-xs-10\">
                     <input name=\"name\" ng-model=\"con.name\" class=\"form-control\" type=\"text\" placeholder=\"Artisanal kale\" id=\"example-text-input\" ng-click=\"hideMsg()\" required>
                 </div>
-                <div class=\"dropdown\">
-                    <select ng-style=\"{'width': getMaxLength() + 'px'}\" name=\"singleSelect\" ng-model=\"con.priority\">
-                        <option value=\"3\"><h2>Low Priority</h2></option>
-                        <option value=\"2\">Normal Priority</option>
-                        <option value=\"1\">High Priority</option>
-                    </select>
 
 
+                <div>
+                    <select ng-model=\"con.priority\" ng-options=\"country.id as country.name for country in con.countries\"></select>
                 </div>
 
                 <span class=\"input-group-btn\">
@@ -61,13 +57,7 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
                     </div>
                 </span>
             </div>
-
-
         </form>
-        ";
-        // line 30
-        echo "{{ con }}";
-        echo "
 
         <table class=\"table\">
             <thead>
@@ -83,31 +73,21 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
                 <tr ng-repeat=\"item in items\">
 
                     <td>";
-        // line 45
+        // line 38
         echo "{{ item.id }}";
         echo "</td>
                     <td>";
-        // line 46
+        // line 39
         echo "{{ item.name }}";
         echo "</td>
-                    <td>";
-        // line 47
+                    <td><input type=\"button\" ng-click=\"done(item.id)\" value=\"";
+        // line 40
         echo "{{ item.state }}";
-        echo "</td>
-                    <td>";
-        // line 48
-        echo "{{ item.priority }}";
-        echo "</td>
-                    <td>";
-        // line 49
-        echo "{{ item.created }}";
-        echo "</td>
+        echo "\"></td>
+                    <td ng-show=\"item.priority == 1\">High</td>
+                    <td ng-show=\"item.priority == 2\">Normal</td>
+                    <td ng-show=\"item.priority == 3\">Low</td>
                     <td><input type=\"button\" ng-click=\"delete(item.id)\" value=\"Delete\"></td>
-                    <td><a href=\"http://localhost:8000/edit/";
-        // line 51
-        echo "{{ item.id }}";
-        echo "\" ng-click=\"getContact(contact.id)\" class=\"btn\" >Edit</a></td>
-
                 </tr>
 
             </tbody>
@@ -116,23 +96,23 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 
 ";
         
-        $__internal_09be96bbe59f5f44a1182f57cfcadff0c683c2b477093e26e61820413a462ade->leave($__internal_09be96bbe59f5f44a1182f57cfcadff0c683c2b477093e26e61820413a462ade_prof);
+        $__internal_a0d55f86a63d91782678c015e1454f6c62263ee6a5fd2d052afee78a1ffb524f->leave($__internal_a0d55f86a63d91782678c015e1454f6c62263ee6a5fd2d052afee78a1ffb524f_prof);
 
     }
 
-    // line 61
+    // line 53
     public function block_javascripts($context, array $blocks = array())
     {
-        $__internal_81c28c8e99e41591e90d635cb525f34b1110fb5fe67062e7b5d4897f9206c4e0 = $this->env->getExtension("native_profiler");
-        $__internal_81c28c8e99e41591e90d635cb525f34b1110fb5fe67062e7b5d4897f9206c4e0->enter($__internal_81c28c8e99e41591e90d635cb525f34b1110fb5fe67062e7b5d4897f9206c4e0_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
+        $__internal_ea7ae136f52f15c272f2694c25776c2a4c97fce35c2d3508a21d708cb410a936 = $this->env->getExtension("native_profiler");
+        $__internal_ea7ae136f52f15c272f2694c25776c2a4c97fce35c2d3508a21d708cb410a936->enter($__internal_ea7ae136f52f15c272f2694c25776c2a4c97fce35c2d3508a21d708cb410a936_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 62
+        // line 54
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/home.js"), "html", null, true);
         echo "\"></script>
 ";
         
-        $__internal_81c28c8e99e41591e90d635cb525f34b1110fb5fe67062e7b5d4897f9206c4e0->leave($__internal_81c28c8e99e41591e90d635cb525f34b1110fb5fe67062e7b5d4897f9206c4e0_prof);
+        $__internal_ea7ae136f52f15c272f2694c25776c2a4c97fce35c2d3508a21d708cb410a936->leave($__internal_ea7ae136f52f15c272f2694c25776c2a4c97fce35c2d3508a21d708cb410a936_prof);
 
     }
 
@@ -148,7 +128,7 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 
     public function getDebugInfo()
     {
-        return array (  130 => 62,  124 => 61,  108 => 51,  103 => 49,  99 => 48,  95 => 47,  91 => 46,  87 => 45,  69 => 30,  41 => 4,  35 => 3,  11 => 1,);
+        return array (  110 => 54,  104 => 53,  85 => 40,  81 => 39,  77 => 38,  41 => 4,  35 => 3,  11 => 1,);
     }
 }
 /* {% extends 'base.html.twig' %}*/
@@ -161,14 +141,10 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 /*                 <div class="col-xs-10">*/
 /*                     <input name="name" ng-model="con.name" class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input" ng-click="hideMsg()" required>*/
 /*                 </div>*/
-/*                 <div class="dropdown">*/
-/*                     <select ng-style="{'width': getMaxLength() + 'px'}" name="singleSelect" ng-model="con.priority">*/
-/*                         <option value="3"><h2>Low Priority</h2></option>*/
-/*                         <option value="2">Normal Priority</option>*/
-/*                         <option value="1">High Priority</option>*/
-/*                     </select>*/
 /* */
 /* */
+/*                 <div>*/
+/*                     <select ng-model="con.priority" ng-options="country.id as country.name for country in con.countries"></select>*/
 /*                 </div>*/
 /* */
 /*                 <span class="input-group-btn">*/
@@ -177,10 +153,7 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 /*                     </div>*/
 /*                 </span>*/
 /*             </div>*/
-/* */
-/* */
 /*         </form>*/
-/*         {{ '{{ con }}' }}*/
 /* */
 /*         <table class="table">*/
 /*             <thead>*/
@@ -197,12 +170,11 @@ class __TwigTemplate_196b1320e74fa340561c50dac479179cc3019b84fcdfe836fd64ede4444
 /* */
 /*                     <td>{{ '{{ item.id }}' }}</td>*/
 /*                     <td>{{ '{{ item.name }}' }}</td>*/
-/*                     <td>{{ '{{ item.state }}' }}</td>*/
-/*                     <td>{{ '{{ item.priority }}' }}</td>*/
-/*                     <td>{{ '{{ item.created }}' }}</td>*/
+/*                     <td><input type="button" ng-click="done(item.id)" value="{{ '{{ item.state }}' }}"></td>*/
+/*                     <td ng-show="item.priority == 1">High</td>*/
+/*                     <td ng-show="item.priority == 2">Normal</td>*/
+/*                     <td ng-show="item.priority == 3">Low</td>*/
 /*                     <td><input type="button" ng-click="delete(item.id)" value="Delete"></td>*/
-/*                     <td><a href="http://localhost:8000/edit/{{ '{{ item.id }}' }}" ng-click="getContact(contact.id)" class="btn" >Edit</a></td>*/
-/* */
 /*                 </tr>*/
 /* */
 /*             </tbody>*/

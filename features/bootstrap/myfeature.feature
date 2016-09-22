@@ -3,9 +3,9 @@ Feature: Todo list
   As a user
   I need to be able to add items I should do next in to my list
 
-  #Rules:
-  #- VAT is 20%
-  #- Delivery for basket under £10 is £3
-  #- Delivery for basket over £10 is £2
-Scenario: Buying a single product under £10
-  Given there is a "Sith Lord Lightsaber", which costs £5pwd
+Scenario: Add item to list
+  Given I am on "/"
+  And I fill in "name" with "myItem"
+  And I fill in "priority" with "1"
+  And I press "submit"
+  Then I should see "myItem"

@@ -11,12 +11,12 @@
 
 
                 <div>
-                    <select ng-model="con.priority" ng-options="country.id as country.name for country in con.countries"></select>
+                    <select name="priority" ng-model="con.priority" ng-options="country.id as country.name for country in con.countries"></select>
                 </div>
 
                 <span class="input-group-btn">
                     <div class="form-group">
-                        <button type="submit" ng-click="add(con)" class="btn btn-primary" ng-disabled="myform.$invalid">Add Item</button>
+                        <button name="submit" type="submit" ng-click="add(con)" class="btn btn-primary" ng-disabled="myform.$invalid">Add Item</button>
                     </div>
                 </span>
             </div>

@@ -5,6 +5,7 @@ use AppBundle\Entity\Item;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,10 +26,44 @@ class ItemController extends Controller
      * @Route("/listdata")
      * @Method("GET")
      */
-    public function todoData(){
+    public function all(){
         $em = $this->getDoctrine()->getManager();
-        $todos = $em->getRepository('AppBundle:Item')->findAll(array(),array('name' => 'ASC'));
+        $todos = $em->getRepository('AppBundle:Item')->findAll();
 
+        $todos = $this->get('serializer')->serialize($todos,'json');
+        $respose = new Response($todos);
+        $respose->headers->set('Content-Type','application/json');
+
+        return $respose;
+    }
+
+    /**
+     * @Route("/tododata")
+     * @Method("GET")
+     */
+    public function todo(){
+        $em = $this->getDoctrine()->getManager();
+        $todos = $em->getRepository('AppBundle:Item')->findBy(
+            array('state'=>'Set As Done'),
+            array('priority'=>'ASC','created'=>'DESC')
+        );
+        $todos = $this->get('serializer')->serialize($todos,'json');
+        $respose = new Response($todos);
+        $respose->headers->set('Content-Type','application/json');
+
+        return $respose;
+    }
+
+    /**
+     * @Route("/donedata")
+     * @Method("GET")
+     */
+    public function doneData(){
+        $em = $this->getDoctrine()->getManager();
+        $todos = $em->getRepository('AppBundle:Item')->findBy(
+            array('state'=>'Done'),
+            array('priority'=>'ASC','created'=>'DESC')
+        );
         $todos = $this->get('serializer')->serialize($todos,'json');
         $respose = new Response($todos);
         $respose->headers->set('Content-Type','application/json');
@@ -98,21 +133,43 @@ class ItemController extends Controller
      *
      */
     public function setDone(Request $request){
-        $item = new Item();
-
         $data = json_decode($request->getContent(), true);
 
-        $id = $data['id'];
-
+        $itemId = $data['id'];
         $em = $this->getDoctrine()->getManager();
-        $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
-        echo $id;
-        if ($item != null) {
-            $item->setState("Done");
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+        $product = $em->getRepository('AppBundle:Item')->find($itemId);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$itemId
+            );
         }
-        return new JsonResponse(array('data' => "State Changed"));
+
+        $product->setState('Done');
+        $em->flush();
+
+        return new JsonResponse(array('data' => "done"));
+        /*
+        try{
+            $item = new Item();
+
+            $data = json_decode($request->getContent(), true);
+
+            $id = $data['id'];
+
+            $em = $this->getDoctrine()->getManager();
+            $item = $em->getRepository('AppBundle:Item')->findOneBy(array('id' => $id));
+            echo $id;
+            if ($item != null) {
+                $item->setState("Done");
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+            }
+            return new JsonResponse(array('data' => "done"));
+        }catch (Exception $e){
+
+        }
+*/
     }
 
     /**

@@ -15,6 +15,48 @@ app.controller('myCtrl', function($scope, $http) {
             $scope.items = "Something went wrong";
         });
 
+    $scope.all = function () {
+        $http.get("http://localhost:8000/listdata")
+            .then(function(response) {
+                $scope.items = response.data;
+                angular.forEach($scope.data, function(value, key){
+                    if(value.Password == "thomasTheKing")
+                        console.log("username is thomas");
+                });
+
+            }, function(response) {
+                $scope.items = "Something went wrong";
+            });
+    }
+
+    $scope.getDone = function () {
+        $http.get("http://localhost:8000/donedata")
+            .then(function(response) {
+                $scope.items = response.data;
+                angular.forEach($scope.data, function(value, key){
+                    if(value.Password == "thomasTheKing")
+                        console.log("username is thomas");
+                });
+
+            }, function(response) {
+                $scope.items = "Something went wrong";
+            });
+    }
+
+    $scope.todo = function () {
+        $http.get("http://localhost:8000/tododata")
+            .then(function(response) {
+                $scope.items = response.data;
+                angular.forEach($scope.data, function(value, key){
+                    if(value.Password == "thomasTheKing")
+                        console.log("username is thomas");
+                });
+
+            }, function(response) {
+                $scope.items = "Something went wrong";
+            });
+    }
+
 
     $scope.add = function(con) {
         $scope.data = angular.copy(con);
@@ -82,13 +124,7 @@ app.controller('myCtrl', function($scope, $http) {
             "id": $scope.id
         };
 
-        var config = {
-            headers : {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-            }
-        };
-
-        $http.patch('http://localhost:8000/setDone', $scope.data, config)
+        $http.patch('http://localhost:8000/setDone', $scope.data)
             .success(function (data, status, headers, config) {
                 $http.get("http://localhost:8000/listdata")
                     .then(function(response) {

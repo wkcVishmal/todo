@@ -109,16 +109,38 @@ class appTestUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             return array (  '_controller' => 'AppBundle\\Controller\\ItemController::indexAction',  '_route' => 'homepage',);
         }
 
-        // app_item_tododata
+        // app_item_all
         if ($pathinfo === '/listdata') {
             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                 $allow = array_merge($allow, array('GET', 'HEAD'));
-                goto not_app_item_tododata;
+                goto not_app_item_all;
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::todoData',  '_route' => 'app_item_tododata',);
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::all',  '_route' => 'app_item_all',);
         }
-        not_app_item_tododata:
+        not_app_item_all:
+
+        // app_item_todo
+        if ($pathinfo === '/tododata') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_app_item_todo;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::todo',  '_route' => 'app_item_todo',);
+        }
+        not_app_item_todo:
+
+        // app_item_donedata
+        if ($pathinfo === '/donedata') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_app_item_donedata;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\ItemController::doneData',  '_route' => 'app_item_donedata',);
+        }
+        not_app_item_donedata:
 
         // app_item_saveitem
         if ($pathinfo === '/saveItem') {

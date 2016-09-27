@@ -6,11 +6,9 @@ app.controller('myCtrl', function($scope, $http) {
     $http.get("http://localhost:8000/listdata")
         .then(function(response) {
             $scope.items = response.data;
-            angular.forEach($scope.data, function(value, key){
-                if(value.Password == "thomasTheKing")
-                    console.log("username is thomas");
+            angular.forEach($scope.items, function(value, key){
+                console.log(value.name);
             });
-
         }, function(response) {
             $scope.items = "Something went wrong";
         });
@@ -19,10 +17,6 @@ app.controller('myCtrl', function($scope, $http) {
         $http.get("http://localhost:8000/listdata")
             .then(function(response) {
                 $scope.items = response.data;
-                angular.forEach($scope.data, function(value, key){
-                    if(value.Password == "thomasTheKing")
-                        console.log("username is thomas");
-                });
 
             }, function(response) {
                 $scope.items = "Something went wrong";
@@ -33,10 +27,6 @@ app.controller('myCtrl', function($scope, $http) {
         $http.get("http://localhost:8000/donedata")
             .then(function(response) {
                 $scope.items = response.data;
-                angular.forEach($scope.data, function(value, key){
-                    if(value.Password == "thomasTheKing")
-                        console.log("username is thomas");
-                });
 
             }, function(response) {
                 $scope.items = "Something went wrong";
@@ -47,10 +37,6 @@ app.controller('myCtrl', function($scope, $http) {
         $http.get("http://localhost:8000/tododata")
             .then(function(response) {
                 $scope.items = response.data;
-                angular.forEach($scope.data, function(value, key){
-                    if(value.Password == "thomasTheKing")
-                        console.log("username is thomas");
-                });
 
             }, function(response) {
                 $scope.items = "Something went wrong";

@@ -47,3 +47,5 @@ vendor/instaclick/
 /vendor/webmozart/
 /var/cache/
 /vendor/**/.git
+/vendor/behat/behat/
+/.idea/

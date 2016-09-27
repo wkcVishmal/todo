@@ -49,4 +49,3 @@ vendor/instaclick/
 /vendor/**/.git
 /vendor/behat/behat/
 /.idea/
-/.DS_Store/
